@@ -2,7 +2,7 @@ import com.twitter.finagle.{Http, Service, SimpleFilter, Address, Name}
 import com.twitter.finagle.http.{Request, Response, Method, Status}
 import com.twitter.util.{Await, Future, Duration, Timer, JavaTimer}
 
-object Main { // RPC
+object NameMain { // RPC
     // Service[A, B] = A => Future[B]
     def debugFilter(id: String) = new SimpleFilter[Request, Response] {
         override def apply(request: Request, service: Service[Request, Response]) = {

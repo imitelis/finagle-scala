@@ -13,7 +13,7 @@ fork := true
 libraryDependencies ++= Seq(
   // finagle
   "com.twitter" %% "finagle-core" % "22.7.0",
-  "com.twitter" %% "finagle-http" % "22.7.0",
+  "com.twitter" %% "finagle-http" % "24.2.0",
   "org.slf4j" % "slf4j-api" % "1.7.5",
   "org.slf4j" % "slf4j-log4j12" % "1.7.5",
   "org.apache.logging.log4j" % "log4j-1.2-api" % "2.17.2"
