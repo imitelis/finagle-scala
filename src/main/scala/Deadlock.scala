@@ -47,21 +47,21 @@ threadTwo.start
 private[this] final def lock: Object = waitq
 
 @tailrec def release(): Unit = {
-// we pass the Promise outside of the lock
-val waiter = lock.synchronized {
-  val next = waitq.pollFirst()
-  if (next == null) {
-    availablePermits += 1
+  // we pass the Promise outside of the lock
+  val waiter = lock.synchronized {
+    val next = waitq.pollFirst()
+    if (next == null) {
+      availablePermits += 1
+    }
+    next
   }
-  next
-}
 
-if (waiter != null) {
-  // since we are no longer synchronized with the interrupt handler
-  // we leverage the atomic state of the Promise to do the right
-  // thing if we race.
-  if (!waiter.updateIfEmpty(Return(this))) {
-    release()
+  if (waiter != null) {
+    // since we are no longer synchronized with the interrupt handler
+    // we leverage the atomic state of the Promise to do the right
+    // thing if we race.
+    if (!waiter.updateIfEmpty(Return(this))) {
+      release()
+    }
   }
-}
 }
